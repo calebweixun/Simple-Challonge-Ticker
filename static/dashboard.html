@@ -1,23 +1,23 @@
 <!doctype html>
 <html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Challonge Ticker Dashboard</title>
-  <link rel="stylesheet" href="/static/style.css">
-  <script defer src="/static/app.js"></script>
-</head>
-<body>
-  <div id="ticker-root" class="container">
-    <div id="tournament-name" class="tournament-name">載入中...</div>
-    <div class="current-match card">
-      <div class="label">當前對戰</div>
-      <div id="current" class="match-content">-</div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Challonge Ticker Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script defer src="/static/app.js"></script>
+  </head>
+  <body>
+    <div id="ticker-root" class="container">
+      <div id="tournament-name" class="tournament-name">載入中...</div>
+      <div class="current-match card">
+        <div class="label">當前對戰</div>
+        <div id="current" class="match-content">-</div>
+      </div>
+      <div class="upcoming card">
+        <div class="label">下一場</div>
+        <ul id="upcoming-list"></ul>
+      </div>
     </div>
-    <div class="upcoming card">
-      <div class="label">下一場</div>
-      <ul id="upcoming-list"></ul>
-    </div>
-  </div>
-</body>
+  </body>
 </html>

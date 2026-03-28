@@ -24,7 +24,8 @@ def mock_data():
     return {
         'name': 'Sample Challonge Tournament',
         'current_matches': [
-            {'player1': 'Vudujin', 'player2': 'Harry', 'score1': 2, 'score2': 0, 'state': 'complete'}
+            {'player1': 'Vudujin', 'player2': 'Harry',
+                'score1': 2, 'score2': 0, 'state': 'complete'}
         ],
         'upcoming_matches': [
             {'player1': 'PumpkinButter', 'player2': 'Thrik'},
@@ -59,9 +60,11 @@ def fetch_tournament_from_html(url):
     upcoming = []
 
     # look for elements with class including 'match' or 'bracket' or 'game'
-    match_nodes = soup.find_all(class_=lambda c: c and ('match' in c or 'bracket' in c or 'game' in c))
+    match_nodes = soup.find_all(class_=lambda c: c and (
+        'match' in c or 'bracket' in c or 'game' in c))
     for node in match_nodes:
-        texts = [t.get_text(strip=True) for t in node.find_all(['div','span','p','td']) if t.get_text(strip=True)]
+        texts = [t.get_text(strip=True) for t in node.find_all(
+            ['div', 'span', 'p', 'td']) if t.get_text(strip=True)]
         if len(texts) >= 2:
             # heuristic: last items might be scores
             p1 = texts[0]
@@ -71,10 +74,12 @@ def fetch_tournament_from_html(url):
             # try to find numeric tokens
             nums = [t for t in texts if t.isdigit()]
             if len(nums) >= 2:
-                score1 = int(nums[0]); score2 = int(nums[1])
+                score1 = int(nums[0])
+                score2 = int(nums[1])
             item = {'player1': p1, 'player2': p2}
             if score1 is not None:
-                item.update({'score1': score1, 'score2': score2, 'state': 'unknown'})
+                item.update(
+                    {'score1': score1, 'score2': score2, 'state': 'unknown'})
                 current.append(item)
             else:
                 upcoming.append(item)
@@ -113,7 +118,8 @@ def api_mock():
 @app.route('/api/tournament')
 def api_tournament():
     url = request.args.get('url')
-    use_mock = request.args.get('mock', 'false').lower() in ('1', 'true', 'yes')
+    use_mock = request.args.get(
+        'mock', 'false').lower() in ('1', 'true', 'yes')
     force = request.args.get('force', 'false').lower() in ('1', 'true', 'yes')
 
     if use_mock or not url:
